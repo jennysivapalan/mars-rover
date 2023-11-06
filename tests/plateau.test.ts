@@ -12,7 +12,7 @@ describe("test createSpace function", () => {
       createSpace(-5, 5);
     }).toThrow(Error);
     expect(() => {
-      createSpace(4.3, 5);
+      createSpace(4, 5.5);
     }).toThrow("Invalid parameters, try again");
   });
 });
