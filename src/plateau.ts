@@ -1,4 +1,4 @@
-type Plateau = { width: number; height: number };
+export type Plateau = { width: number; height: number };
 
 export function createSpace(width: number, height: number) {
   if (
