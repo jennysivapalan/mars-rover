@@ -6,6 +6,7 @@ import {
   ROTATE_LEFT,
   ROTATE_RIGHT,
   Rotation,
+  GridMove,
 } from "../src/rover.types";
 
 export function createRover(
@@ -28,19 +29,16 @@ export function createRover(
 
 export function move(rover: Rover, move: Move) {
   const BOUNDARY_ERROR_MSG = "Rover has hit the boundary so stopping here";
+
   if (move === "M") {
     const facingDirection = rover.facingDirection;
     switch (facingDirection) {
       case "N": {
-        const newY = rover.y + 1;
-        if (newY > rover.plateau.width) throw new Error(BOUNDARY_ERROR_MSG);
-        else rover.y = newY;
+        moveUpOrDown(1, rover);
         break;
       }
       case "S": {
-        const newY = rover.y - 1;
-        if (newY < 0) throw new Error(BOUNDARY_ERROR_MSG);
-        else rover.y = newY;
+        moveUpOrDown(-1, rover);
         break;
       }
       case "E":
@@ -57,6 +55,16 @@ export function move(rover: Rover, move: Move) {
   } else if (move === "R") {
     rotate(ROTATE_RIGHT, rover);
   }
+  return rover;
+}
+
+function moveUpOrDown(gridMove: GridMove, rover: Rover) {
+  const BOUNDARY_ERROR_MSG = "Rover has hit the boundary so stopping here";
+
+  const newY = rover.y + gridMove;
+  if (newY < 0 || newY > rover.plateau.height)
+    throw new Error(BOUNDARY_ERROR_MSG);
+  else rover.y = newY;
   return rover;
 }
 

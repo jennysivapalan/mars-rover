@@ -28,3 +28,5 @@ export const ROTATE_RIGHT: Rotation[] = [
 ];
 
 export type Move = "M" | "L" | "R";
+
+export type GridMove = 1 | -1;
