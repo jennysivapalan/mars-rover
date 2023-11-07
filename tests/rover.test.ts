@@ -31,76 +31,71 @@ describe("test moveRover function", () => {
   it("should move a rover one position up", () => {
     const plateau = createSpace(5, 5);
     const rover = createRover(plateau, 1, 2, "N");
-    const movedRover = move(rover, "M");
-    expect(movedRover.x).toBe(1);
-    expect(movedRover.y).toBe(3);
-    expect(movedRover.facingDirection).toBe("N");
+    move(rover, "M");
+    expect(rover.x).toBe(1);
+    expect(rover.y).toBe(3);
+    expect(rover.facingDirection).toBe("N");
   });
 
   it("should move a rover multiple forward", () => {
     const plateau = createSpace(10, 10);
     const rover = createRover(plateau, 1, 2, "E");
-    const movedRover1 = move(rover, "M");
-    const movedRover2 = move(movedRover1, "M");
-    const movedRover3 = move(movedRover2, "M");
+    move(rover, "M");
+    move(rover, "M");
+    move(rover, "M");
 
-    expect(movedRover3.x).toBe(4);
-    expect(movedRover3.y).toBe(2);
-    expect(movedRover3.facingDirection).toBe("E");
+    expect(rover.x).toBe(4);
+    expect(rover.y).toBe(2);
+    expect(rover.facingDirection).toBe("E");
   });
 
   it("should rotate a rover to the left", () => {
     const plateau = createSpace(5, 5);
     const rover = createRover(plateau, 1, 2, "N");
 
-    const movedRover1 = move(rover, "L");
-    expect(movedRover1.x).toBe(1);
-    expect(movedRover1.y).toBe(2);
-    expect(movedRover1.facingDirection).toBe("W");
+    move(rover, "L");
+    expect(rover.x).toBe(1);
+    expect(rover.y).toBe(2);
+    expect(rover.facingDirection).toBe("W");
 
-    const movedRover2 = move(rover, "L");
-    expect(movedRover2.x).toBe(1);
-    expect(movedRover2.y).toBe(2);
-    expect(movedRover2.facingDirection).toBe("S");
+    move(rover, "L");
+    expect(rover.x).toBe(1);
+    expect(rover.y).toBe(2);
+    expect(rover.facingDirection).toBe("S");
 
-    const movedRover3 = move(rover, "L");
-    expect(movedRover3.x).toBe(1);
-    expect(movedRover3.y).toBe(2);
-    expect(movedRover3.facingDirection).toBe("E");
+    move(rover, "L");
+    expect(rover.x).toBe(1);
+    expect(rover.y).toBe(2);
+    expect(rover.facingDirection).toBe("E");
 
-    const movedRover4 = move(rover, "L");
-    expect(movedRover4.x).toBe(1);
-    expect(movedRover4.y).toBe(2);
-    expect(movedRover4.facingDirection).toBe("N");
+    move(rover, "L");
+    expect(rover.x).toBe(1);
+    expect(rover.y).toBe(2);
+    expect(rover.facingDirection).toBe("N");
   });
 
   it("should rotate a rover to the right", () => {
     const plateau = createSpace(5, 5);
     const rover = createRover(plateau, 1, 2, "N");
 
-    const movedRover1 = move(rover, "R");
-    expect(movedRover1.x).toBe(1);
-    expect(movedRover1.y).toBe(2);
-    expect(movedRover1.facingDirection).toBe("E");
+    move(rover, "R");
+    expect(rover.x).toBe(1);
+    expect(rover.y).toBe(2);
+    expect(rover.facingDirection).toBe("E");
 
-    const movedRover2 = move(rover, "R");
-    expect(movedRover2.x).toBe(1);
-    expect(movedRover2.y).toBe(2);
-    expect(movedRover2.facingDirection).toBe("S");
+    move(rover, "R");
+    expect(rover.x).toBe(1);
+    expect(rover.y).toBe(2);
+    expect(rover.facingDirection).toBe("S");
 
-    const movedRover3 = move(rover, "R");
-    expect(movedRover3.x).toBe(1);
-    expect(movedRover3.y).toBe(2);
-    expect(movedRover3.facingDirection).toBe("W");
+    move(rover, "R");
+    expect(rover.x).toBe(1);
+    expect(rover.y).toBe(2);
+    expect(rover.facingDirection).toBe("W");
 
-    const movedRover4 = move(rover, "R");
-    expect(movedRover4.x).toBe(1);
-    expect(movedRover4.y).toBe(2);
-    expect(movedRover4.facingDirection).toBe("N");
+    move(rover, "R");
+    expect(rover.x).toBe(1);
+    expect(rover.y).toBe(2);
+    expect(rover.facingDirection).toBe("N");
   });
-
-
- 
-
-
 });
