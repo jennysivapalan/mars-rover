@@ -37,6 +37,18 @@ describe("test moveRover function", () => {
     expect(movedRover.facingDirection).toBe("N");
   });
 
+  it("should move a rover multiple forward", () => {
+    const plateau = createSpace(10, 10);
+    const rover = createRover(plateau, 1, 2, "E");
+    const movedRover1 = move(rover, "M");
+    const movedRover2 = move(movedRover1, "M");
+    const movedRover3 = move(movedRover2, "M");
+
+    expect(movedRover3.x).toBe(4);
+    expect(movedRover3.y).toBe(2);
+    expect(movedRover3.facingDirection).toBe("E");
+  });
+
   it("should rotate a rover to the left", () => {
     const plateau = createSpace(5, 5);
     const rover = createRover(plateau, 1, 2, "N");
@@ -86,4 +98,9 @@ describe("test moveRover function", () => {
     expect(movedRover4.y).toBe(2);
     expect(movedRover4.facingDirection).toBe("N");
   });
+
+
+ 
+
+
 });

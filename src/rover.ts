@@ -28,7 +28,22 @@ export function createRover(
 
 export function move(rover: Rover, move: Move) {
   if (move === "M") {
-    rover.y = rover.y + 1;
+    const facingDirection = rover.facingDirection;
+    switch (facingDirection) {
+      case "N":
+        rover.y = rover.y + 1;
+        break;
+      case "S":
+        rover.y = rover.y - 1;
+        break;
+      case "E":
+        rover.x = rover.x + 1;
+        break;
+      case "W":
+        rover.x = rover.x - 1;
+        break;
+    }
+    return rover;
   }
   if (move === "L") {
     rotate(ROTATE_LEFT, rover);
