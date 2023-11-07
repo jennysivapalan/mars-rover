@@ -22,7 +22,7 @@ export function createRover(
     Number.isInteger(x) &&
     Number.isInteger(y)
   )
-    return { x: x, y: y, facingDirection: facingDirection };
+    return { x: x, y: y, facingDirection: facingDirection, plateau: plateau };
   else throw new Error("Invalid rover parameters, try again");
 }
 
@@ -30,9 +30,13 @@ export function move(rover: Rover, move: Move) {
   if (move === "M") {
     const facingDirection = rover.facingDirection;
     switch (facingDirection) {
-      case "N":
-        rover.y = rover.y + 1;
+      case "N": {
+        const newY = rover.y + 1;
+        if (newY > rover.plateau.width)
+          throw new Error("Rover has hit the boundary so stopping here");
+        else rover.y = newY;
         break;
+      }
       case "S":
         rover.y = rover.y - 1;
         break;

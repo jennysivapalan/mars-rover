@@ -1,6 +1,13 @@
+import { Plateau } from "./plateau";
+
 const FacingDirectionString = ["N", "E", "S", "W"] as const;
 export type FacingDirection = (typeof FacingDirectionString)[number];
-export type Rover = { x: number; y: number; facingDirection: FacingDirection };
+export type Rover = {
+  x: number;
+  y: number;
+  facingDirection: FacingDirection;
+  plateau: Plateau;
+};
 
 export type Rotation = {
   start: FacingDirection;
