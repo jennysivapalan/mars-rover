@@ -45,19 +45,19 @@ export function move(rover: Rover, moves: string) {
     rover.y = rover.y + 1;
   }
   if (moves === "L") {
-    const newPosition = ROTATE_LEFT.find(
-      (position) => position.start === rover.facingDirection
-    );
-    newPosition
-      ? (rover.facingDirection = newPosition.end)
-      : rover.facingDirection;
+    rotate(ROTATE_LEFT, rover);
   } else if (moves === "R") {
-    const newPosition = ROTATE_RIGHT.find(
-      (position) => position.start === rover.facingDirection
-    );
-    newPosition
-      ? (rover.facingDirection = newPosition.end)
-      : rover.facingDirection;
+    rotate(ROTATE_RIGHT, rover);
   }
+  return rover;
+}
+
+function rotate(rotationMap: Rotation[], rover: Rover) {
+  const newPosition = rotationMap.find(
+    (position) => position.start === rover.facingDirection
+  );
+  newPosition
+    ? (rover.facingDirection = newPosition.end)
+    : rover.facingDirection;
   return rover;
 }
