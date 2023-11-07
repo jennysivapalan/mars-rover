@@ -1,5 +1,5 @@
 import { createSpace } from "../src/plateau";
-import { createRover } from "../src/rover";
+import { createRover, move } from "../src/rover";
 
 describe("test placeRover function", () => {
   it("should return a rover that is in the grid", () => {
@@ -24,5 +24,41 @@ describe("test placeRover function", () => {
     expect(() => {
       createRover(plateau, 3.2, 2.4, "W");
     }).toThrow("Invalid rover parameters, try again");
+  });
+});
+
+describe("test moveRover function", () => {
+  it("should move a rover one position up", () => {
+    const plateau = createSpace(5, 5);
+    const rover = createRover(plateau, 1, 2, "N");
+    const movedRover = move(rover, "M");
+    expect(movedRover.x).toBe(1);
+    expect(movedRover.y).toBe(3);
+    expect(movedRover.facingDirection).toBe("N");
+  });
+
+  it("should rotate a rover to the left", () => {
+    const plateau = createSpace(5, 5);
+    const rover = createRover(plateau, 1, 2, "N");
+
+    const movedRover1 = move(rover, "L");
+    expect(movedRover1.x).toBe(1);
+    expect(movedRover1.y).toBe(2);
+    expect(movedRover1.facingDirection).toBe("W");
+
+    const movedRover2 = move(rover, "L");
+    expect(movedRover2.x).toBe(1);
+    expect(movedRover2.y).toBe(2);
+    expect(movedRover2.facingDirection).toBe("S");
+
+    const movedRover3 = move(rover, "L");
+    expect(movedRover3.x).toBe(1);
+    expect(movedRover3.y).toBe(2);
+    expect(movedRover3.facingDirection).toBe("E");
+
+    const movedRover4 = move(rover, "L");
+    expect(movedRover4.x).toBe(1);
+    expect(movedRover4.y).toBe(2);
+    expect(movedRover4.facingDirection).toBe("N");
   });
 });
