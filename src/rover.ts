@@ -48,9 +48,7 @@ export function move(rover: Rover, move: Move) {
         moveLeftOrRight(-1, rover);
         break;
     }
-    return rover;
-  }
-  if (move === "L") {
+  } else if (move === "L") {
     rotate(ROTATE_LEFT, rover);
   } else if (move === "R") {
     rotate(ROTATE_RIGHT, rover);
