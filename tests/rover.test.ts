@@ -140,4 +140,30 @@ describe("test moveRover function", () => {
     expect(rover.y).toBe(0);
     expect(rover.facingDirection).toBe("S");
   });
+
+  it("should not move outside of the plateau (checking left boundary)", () => {
+    const plateau = createSpace(2, 2);
+    const rover = createRover(plateau, 0, 2, "W");
+
+    expect(() => {
+      move(rover, "M");
+    }).toThrow(Error);
+
+    expect(rover.x).toBe(0);
+    expect(rover.y).toBe(2);
+    expect(rover.facingDirection).toBe("W");
+  });
+
+  it("should not move outside of the plateau (checking right boundary)", () => {
+    const plateau = createSpace(2, 2);
+    const rover = createRover(plateau, 2, 2, "E");
+
+    expect(() => {
+      move(rover, "M");
+    }).toThrow(Error);
+
+    expect(rover.x).toBe(2);
+    expect(rover.y).toBe(2);
+    expect(rover.facingDirection).toBe("E");
+  });
 });

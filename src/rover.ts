@@ -9,6 +9,8 @@ import {
   GridMove,
 } from "../src/rover.types";
 
+const BOUNDARY_ERROR_MSG = "Rover has hit the boundary so stopping here";
+
 export function createRover(
   plateau: Plateau,
   x: number,
@@ -33,19 +35,17 @@ export function move(rover: Rover, move: Move) {
   if (move === "M") {
     const facingDirection = rover.facingDirection;
     switch (facingDirection) {
-      case "N": {
+      case "N":
         moveUpOrDown(1, rover);
         break;
-      }
-      case "S": {
+      case "S":
         moveUpOrDown(-1, rover);
         break;
-      }
       case "E":
-        rover.x = rover.x + 1;
+        moveLeftOrRight(1, rover);
         break;
       case "W":
-        rover.x = rover.x - 1;
+        moveLeftOrRight(-1, rover);
         break;
     }
     return rover;
@@ -59,12 +59,18 @@ export function move(rover: Rover, move: Move) {
 }
 
 function moveUpOrDown(gridMove: GridMove, rover: Rover) {
-  const BOUNDARY_ERROR_MSG = "Rover has hit the boundary so stopping here";
-
   const newY = rover.y + gridMove;
   if (newY < 0 || newY > rover.plateau.height)
     throw new Error(BOUNDARY_ERROR_MSG);
   else rover.y = newY;
+  return rover;
+}
+
+function moveLeftOrRight(gridMove: GridMove, rover: Rover) {
+  const newX = rover.x + gridMove;
+  if (newX < 0 || newX > rover.plateau.width)
+    throw new Error(BOUNDARY_ERROR_MSG);
+  else rover.x = newX;
   return rover;
 }
 
