@@ -15,6 +15,13 @@ const ROTATE_LEFT: Rotation[] = [
   { start: "E", end: "N" },
 ];
 
+const ROTATE_RIGHT: Rotation[] = [
+  { start: "N", end: "E" },
+  { start: "E", end: "S" },
+  { start: "S", end: "W" },
+  { start: "W", end: "N" },
+];
+
 export function createRover(
   plateau: Plateau,
   x: number,
@@ -39,6 +46,13 @@ export function move(rover: Rover, moves: string) {
   }
   if (moves === "L") {
     const newPosition = ROTATE_LEFT.find(
+      (position) => position.start === rover.facingDirection
+    );
+    newPosition
+      ? (rover.facingDirection = newPosition.end)
+      : rover.facingDirection;
+  } else if (moves === "R") {
+    const newPosition = ROTATE_RIGHT.find(
       (position) => position.start === rover.facingDirection
     );
     newPosition
