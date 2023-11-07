@@ -127,4 +127,17 @@ describe("test moveRover function", () => {
     expect(rover.y).toBe(2);
     expect(rover.facingDirection).toBe("N");
   });
+
+  it("should not move outside of the plateau (checking bottom boundary)", () => {
+    const plateau = createSpace(2, 2);
+    const rover = createRover(plateau, 1, 0, "S");
+
+    expect(() => {
+      move(rover, "M");
+    }).toThrow(Error);
+
+    expect(rover.x).toBe(1);
+    expect(rover.y).toBe(0);
+    expect(rover.facingDirection).toBe("S");
+  });
 });
