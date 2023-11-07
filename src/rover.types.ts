@@ -1,7 +1,7 @@
 import { Plateau } from "./plateau";
 
-const FacingDirectionString = ["N", "E", "S", "W"] as const;
-export type FacingDirection = (typeof FacingDirectionString)[number];
+export type FacingDirection = "N" | "E" | "S" | "W";
+
 export type Rover = {
   x: number;
   y: number;
