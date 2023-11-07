@@ -22,6 +22,8 @@ const ROTATE_RIGHT: Rotation[] = [
   { start: "W", end: "N" },
 ];
 
+type Move = "M" | "L" | "R";
+
 export function createRover(
   plateau: Plateau,
   x: number,
@@ -40,13 +42,13 @@ export function createRover(
   else throw new Error("Invalid rover parameters, try again");
 }
 
-export function move(rover: Rover, moves: string) {
-  if (moves === "M") {
+export function move(rover: Rover, move: Move) {
+  if (move === "M") {
     rover.y = rover.y + 1;
   }
-  if (moves === "L") {
+  if (move === "L") {
     rotate(ROTATE_LEFT, rover);
-  } else if (moves === "R") {
+  } else if (move === "R") {
     rotate(ROTATE_RIGHT, rover);
   }
   return rover;
