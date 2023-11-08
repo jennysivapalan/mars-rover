@@ -56,5 +56,27 @@ describe("test taking input commands to create mars rover", () => {
     expect(() => {
       createMars(["5 2", " "]);
     }).toThrow("Can't create rover, invalid line: ");
+
+    expect(() => {
+      createMars(["5 2", "A 1 N"]);
+    }).toThrow(
+      "Can't create rover - Error: Invalid rover parameters, try again"
+    );
+
+    expect(() => {
+      createMars(["5 2", "1 B N"]);
+    }).toThrow(
+      "Can't create rover - Error: Invalid rover parameters, try again"
+    );
+
+    expect(() => {
+      createMars(["5 2", "1.1 2 N"]);
+    }).toThrow(
+      "Can't create rover - Error: Invalid rover parameters, try again"
+    );
+
+    expect(() => {
+      createMars(["5 2", "1 2 F"]);
+    }).toThrow("Can't create rover, invalid line: 1 2 F");
   });
 });

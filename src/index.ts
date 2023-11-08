@@ -1,5 +1,5 @@
 import { Plateau, createSpace } from "../src/plateau";
-import { Rover, FacingDirection } from "../src/rover.types";
+import { Rover, FacingDirection, FacingDirections } from "../src/rover.types";
 import { createRover } from "../src/rover";
 
 export type Mars = {
@@ -27,14 +27,15 @@ function createPlateau(line: string) {
 
 function landRover(line: string, plateau: Plateau) {
   const lineAsArray = line.split(" ");
-  if (lineAsArray.length !== 3)
+  const direction = lineAsArray[2] as FacingDirection;
+  if (lineAsArray.length !== 3 || !FacingDirections.includes(direction))
     throw new Error(`Can't create rover, invalid line: ${line}`);
   try {
     return createRover(
       plateau,
       Number(lineAsArray[0]),
       Number(lineAsArray[1]),
-      lineAsArray[2] as FacingDirection
+      direction
     );
   } catch (error) {
     throw new Error(`Can't create rover - ${error}`);
