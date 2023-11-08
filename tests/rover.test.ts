@@ -201,7 +201,7 @@ describe("test moveRover function", () => {
   });
 });
 
-describe("test multiple rovers on a plateau", () => {
+describe("test multiple rovers on a plateau (placement)", () => {
   it("should allow for more than one rover to be on a plateau", () => {
     const plateau = createSpace(5, 5);
     expect(plateau.rovers.length).toBe(0);
@@ -242,5 +242,44 @@ describe("test multiple rovers on a plateau", () => {
       "A rover is already place here so this rover cannot be placed here"
     );
     expect(plateau.rovers.length).toBe(1);
+  });
+});
+
+describe("test multiple rovers on a plateau (movement)", () => {
+  it("should allow multiple rovers to move around", () => {
+    const plateau = createSpace(5, 5);
+    const rover = createRover(plateau, 1, 2, "N");
+    addRover(plateau, rover);
+    const rover2 = createRover(plateau, 3, 3, "E");
+    addRover(plateau, rover2);
+
+    move(rover, "L");
+    move(rover, "M");
+    move(rover, "L");
+    move(rover, "M");
+    move(rover, "L");
+    move(rover, "M");
+    move(rover, "L");
+    move(rover, "M");
+    move(rover, "M");
+
+    move(rover2, "M");
+    move(rover2, "M");
+    move(rover2, "R");
+    move(rover2, "M");
+    move(rover2, "M");
+    move(rover2, "R");
+    move(rover2, "M");
+    move(rover2, "R");
+    move(rover2, "R");
+    move(rover2, "M");
+
+    expect(rover.x).toBe(1);
+    expect(rover.y).toBe(3);
+    expect(rover.facingDirection).toBe("N");
+
+    expect(rover2.x).toBe(5);
+    expect(rover2.y).toBe(1);
+    expect(rover2.facingDirection).toBe("E");
   });
 });
