@@ -1,8 +1,8 @@
-import { start, Mars } from "../src/index";
+import { start } from "../src/index";
 
 describe("test taking input commands to create mars rover", () => {
   it("should create a plateau for mars based on input string", () => {
-    const input = ["5 5", "1 2 N"];
+    const input = ["5 5", "1 2 N", "M"];
     const mars = start(input);
 
     expect(mars.plateau.width).toBe(5);
@@ -32,7 +32,7 @@ describe("test taking input commands to create mars rover", () => {
   });
 
   it("should create first rover for mars based on input string", () => {
-    const input = ["5 5", "1 2 N"];
+    const input = ["5 5", "1 2 N", ""];
     const mars = start(input);
 
     expect(mars.rover.x).toBe(1);
@@ -80,12 +80,21 @@ describe("test taking input commands to create mars rover", () => {
     }).toThrow("Can't create rover, invalid line: 1 2 F");
   });
 
-  it("should move first rover for mars based on input string", () => {
+  it("should move first rover for mars based on single input string for line 3", () => {
     const input = ["5 5", "1 2 N", "M"];
     const mars = start(input);
 
     expect(mars.rover.x).toBe(1);
     expect(mars.rover.y).toBe(3);
     expect(mars.rover.facingDirection).toBe("N");
+  });
+
+  it("should move first rover for mars based on a couple of commands for line 3 string", () => {
+    const input = ["5 5", "3 3 N", "MLMMRR"];
+    const mars = start(input);
+
+    expect(mars.rover.x).toBe(1);
+    expect(mars.rover.y).toBe(4);
+    expect(mars.rover.facingDirection).toBe("E");
   });
 });

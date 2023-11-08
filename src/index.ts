@@ -31,7 +31,7 @@ function createPlateau(line: string) {
   }
 }
 
-function landRover(line: string, plateau: Plateau) {
+export function landRover(line: string, plateau: Plateau) {
   const lineAsArray = line.split(" ");
   const direction = lineAsArray[2] as FacingDirection;
   if (lineAsArray.length !== 3 || !FacingDirections.includes(direction))
@@ -49,5 +49,5 @@ function landRover(line: string, plateau: Plateau) {
 }
 
 function moveRover(rover: Rover, line: string) {
-  move(rover, line as Move);
+  return line.split("").map((movement) => move(rover, movement as Move));
 }
