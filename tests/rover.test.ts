@@ -198,3 +198,18 @@ describe("test moveRover function", () => {
     }).toThrow("Rover has stopped it hit a boundary");
   });
 });
+
+describe("test multuple rovers on a plateau", () => {
+  it("should allow for more than one rover to be on a plateau", () => {
+    const plateau = createSpace(5, 5);
+    const rover = createRover(plateau, 1, 2, "N");
+    expect(rover.x).toBe(1);
+    expect(rover.y).toBe(2);
+    expect(rover.facingDirection).toBe("N");
+
+    const rover2 = createRover(plateau, 3, 2, "W");
+    expect(rover2.x).toBe(3);
+    expect(rover2.y).toBe(2);
+    expect(rover2.facingDirection).toBe("W");
+  });
+});
