@@ -34,10 +34,11 @@ describe("test taking input commands to create mars rover", () => {
   it("should create first rover for mars based on input string", () => {
     const input = ["5 5", "1 2 N", "M"];
     const mars = start(input);
-
-    expect(mars.rover.x).toBe(1);
-    expect(mars.rover.y).toBe(3); //as M moves the rover up one
-    expect(mars.rover.facingDirection).toBe("N");
+    expect(mars.plateau.rovers.length).toBe(1);
+    const rover = mars.plateau.rovers[0];
+    expect(rover.x).toBe(1);
+    expect(rover.y).toBe(3); //as M moves the rover up one
+    expect(rover.facingDirection).toBe("N");
   });
 
   it("should error if the second line is incorrect ", () => {
@@ -83,19 +84,20 @@ describe("test taking input commands to create mars rover", () => {
   it("should move first rover for mars based on single input string for line 3", () => {
     const input = ["5 5", "1 2 N", "M"];
     const mars = start(input);
-
-    expect(mars.rover.x).toBe(1);
-    expect(mars.rover.y).toBe(3);
-    expect(mars.rover.facingDirection).toBe("N");
+    const rover = mars.plateau.rovers[0];
+    expect(rover.x).toBe(1);
+    expect(rover.y).toBe(3);
+    expect(rover.facingDirection).toBe("N");
   });
 
   it("should move first rover for mars based on a couple of commands for line 3 string", () => {
     const input = ["5 5", "3 3 N", "MLMMRR"];
     const mars = start(input);
+    const rover = mars.plateau.rovers[0];
 
-    expect(mars.rover.x).toBe(1);
-    expect(mars.rover.y).toBe(4);
-    expect(mars.rover.facingDirection).toBe("E");
+    expect(rover.x).toBe(1);
+    expect(rover.y).toBe(4);
+    expect(rover.facingDirection).toBe("E");
   });
 
   it("should keep rover as is if third line is empty", () => {
@@ -114,5 +116,20 @@ describe("test taking input commands to create mars rover", () => {
     expect(() => {
       start(["5 5", "3 3 N", "A"]);
     }).toThrow("Invalid move supplied");
+  });
+
+  it("should parse input for more than one rover for input string", () => {
+    const input = ["5 5", "3 3 N", "M", "1 1 S", "L"];
+    const mars = start(input);
+    const rovers = mars.plateau.rovers;
+    expect(rovers.length).toBe(2);
+
+    expect(rovers[0].x).toBe(3);
+    expect(rovers[0].y).toBe(4);
+    expect(rovers[0].facingDirection).toBe("N");
+
+    expect(rovers[1].x).toBe(1);
+    expect(rovers[1].y).toBe(1);
+    expect(rovers[1].facingDirection).toBe("E");
   });
 });

@@ -9,14 +9,13 @@ import { createRover, move } from "../src/rover";
 
 export type Mars = {
   plateau: Plateau;
-  rover: Rover;
 };
 
 export function start(input: string[]) {
   const plateau = createPlateau(input[0]);
-  const rover = landRover(input[1], plateau);
-  moveRover(rover, input[2]);
-  return { plateau: plateau, rover: rover };
+  const rovers = landAndMoveRovers(input.slice(1), plateau);
+  plateau.rovers = rovers;
+  return { plateau: plateau };
 }
 
 function createPlateau(line: string) {
@@ -29,6 +28,20 @@ function createPlateau(line: string) {
   } catch (error) {
     throw new Error(`Can't create plateau - ${error}`);
   }
+}
+
+function landAndMoveRovers(input: string[], plateau: Plateau) {
+  const rovers: Array<Rover> = [];
+  for (let i = 0; i < input.length; i = i + 2) {
+    const roverLine = input[i];
+    const moveLine = input[i + 1];
+    const rover = landRover(roverLine, plateau);
+
+    moveRover(rover, moveLine);
+    rovers.push(rover);
+  }
+
+  return rovers;
 }
 
 export function landRover(line: string, plateau: Plateau) {
