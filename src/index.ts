@@ -6,11 +6,15 @@ export type Mars = {
 
 export function createMars(input: string[]) {
   const firstLineAsArray = input[0].split(" ");
-  const plateau = createSpace(
-    Number(firstLineAsArray[0]),
-    Number(firstLineAsArray[1])
-  );
-  return {
-    plateau: plateau,
-  };
+  try {
+    const plateau = createSpace(
+      Number(firstLineAsArray[0]),
+      Number(firstLineAsArray[1])
+    );
+    return {
+      plateau: plateau,
+    };
+  } catch (error) {
+    throw new Error(`Can't create plateau - ${error}`);
+  }
 }

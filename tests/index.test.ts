@@ -8,4 +8,11 @@ describe("test taking input commands to create mars rover", () => {
     expect(mars.plateau.width).toBe(5);
     expect(mars.plateau.width).toBe(5);
   });
+
+  it("should error if first line is incorrect ", () => {
+    const input = ["5", "1 2 N", "LMLMLMLMM", "3 3 E", "MMRMMRMRRM"];
+    expect(() => {
+      createMars(input);
+    }).toThrow("Can't create plateau - Error: Invalid parameters, try again");
+  });
 });
