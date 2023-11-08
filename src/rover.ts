@@ -71,11 +71,9 @@ export function move(rover: Rover, move: Move) {
 function moveUpOrDown(gridMove: GridMove, rover: Rover) {
   const newY = rover.y + gridMove;
   if (newY < 0 || newY > rover.plateau.height) {
-    rover.hasStopped = true;
-    throw new Error(BOUNDARY_ERROR_MSG);
+    stopRoverAndError(rover, BOUNDARY_ERROR_MSG);
   } else if (isARoverInThisPosition(rover.plateau, rover.x, newY)) {
-    rover.hasStopped = true;
-    throw new Error(ROVER_IN_LOCATION_ERROR_MSG);
+    stopRoverAndError(rover, ROVER_IN_LOCATION_ERROR_MSG);
   } else rover.y = newY;
   return rover;
 }
@@ -83,13 +81,16 @@ function moveUpOrDown(gridMove: GridMove, rover: Rover) {
 function moveLeftOrRight(gridMove: GridMove, rover: Rover) {
   const newX = rover.x + gridMove;
   if (newX < 0 || newX > rover.plateau.width) {
-    rover.hasStopped = true;
-    throw new Error(BOUNDARY_ERROR_MSG);
+    stopRoverAndError(rover, BOUNDARY_ERROR_MSG);
   } else if (isARoverInThisPosition(rover.plateau, newX, rover.y)) {
-    rover.hasStopped = true;
-    throw new Error(ROVER_IN_LOCATION_ERROR_MSG);
+    stopRoverAndError(rover, ROVER_IN_LOCATION_ERROR_MSG);
   } else rover.x = newX;
   return rover;
+}
+
+function stopRoverAndError(rover: Rover, errorMsg: string) {
+  rover.hasStopped = true;
+  throw new Error(errorMsg);
 }
 
 function rotate(rotationMap: Rotation[], rover: Rover) {
