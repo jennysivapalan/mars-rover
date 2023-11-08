@@ -282,4 +282,24 @@ describe("test multiple rovers on a plateau (movement)", () => {
     expect(rover2.y).toBe(1);
     expect(rover2.facingDirection).toBe("E");
   });
+
+  it("should stop a rover moving if another rover is occupying the space", () => {
+    const plateau = createSpace(2, 2);
+    const rover = createRover(plateau, 1, 2, "E");
+    addRover(plateau, rover);
+    const rover2 = createRover(plateau, 2, 1, "N");
+    addRover(plateau, rover2);
+
+    move(rover, "M");
+    expect(rover.x).toBe(2);
+    expect(rover.y).toBe(2);
+
+    expect(() => {
+      move(rover2, "M");
+    }).toThrow(
+      "A rover is already place here so this rover cannot be moved here"
+    );
+    expect(rover2.x).toBe(2);
+    expect(rover2.y).toBe(1);
+  });
 });
