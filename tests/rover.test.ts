@@ -1,4 +1,4 @@
-import { createSpace } from "../src/plateau";
+import { createSpace, addRover } from "../src/plateau";
 import { createRover, move } from "../src/rover";
 
 describe("test placeRover function", () => {
@@ -169,6 +169,8 @@ describe("test moveRover function", () => {
 
   it("should stop moving forward and taking on instructions if it hits a boundary", () => {
     const plateau = createSpace(3, 2);
+    expect(plateau.rovers).toEqual([]);
+
     const rover = createRover(plateau, 1, 1, "N");
 
     move(rover, "M");
@@ -199,10 +201,14 @@ describe("test moveRover function", () => {
   });
 });
 
-describe("test multuple rovers on a plateau", () => {
+describe("test multiple rovers on a plateau", () => {
   it("should allow for more than one rover to be on a plateau", () => {
     const plateau = createSpace(5, 5);
+    expect(plateau.rovers.length).toBe(0);
+
     const rover = createRover(plateau, 1, 2, "N");
+    addRover(plateau, rover);
+
     expect(rover.x).toBe(1);
     expect(rover.y).toBe(2);
     expect(rover.facingDirection).toBe("N");
@@ -211,5 +217,30 @@ describe("test multuple rovers on a plateau", () => {
     expect(rover2.x).toBe(3);
     expect(rover2.y).toBe(2);
     expect(rover2.facingDirection).toBe("W");
+
+    addRover(plateau, rover2);
+    expect(plateau.rovers.length).toBe(2);
+  });
+
+  it("should allow not allow a rover to be place on plateau where another rover is", () => {
+    const plateau = createSpace(5, 5);
+    expect(plateau.rovers.length).toBe(0);
+
+    const rover = createRover(plateau, 1, 2, "N");
+    addRover(plateau, rover);
+
+    expect(rover.x).toBe(1);
+    expect(rover.y).toBe(2);
+    expect(rover.facingDirection).toBe("N");
+    expect(plateau.rovers.length).toBe(1);
+
+    expect(plateau.rovers[0].x).toBe(1);
+
+    expect(() => {
+      createRover(plateau, 1, 2, "W");
+    }).toThrow(
+      "A rover is already place here so this rover cannot be placed here"
+    );
+    expect(plateau.rovers.length).toBe(1);
   });
 });

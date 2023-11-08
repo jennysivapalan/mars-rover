@@ -24,7 +24,12 @@ export function createRover(
     y <= plateau.height &&
     Number.isInteger(x) &&
     Number.isInteger(y)
-  )
+  ) {
+    if (plateau.rovers.find((rover) => rover.x === x && rover.y === y))
+      throw new Error(
+        "A rover is already place here so this rover cannot be placed here"
+      );
+
     return {
       x: x,
       y: y,
@@ -32,7 +37,7 @@ export function createRover(
       plateau: plateau,
       hasStopped: false,
     };
-  else throw new Error("Invalid rover parameters, try again");
+  } else throw new Error("Invalid rover parameters, try again");
 }
 
 export function move(rover: Rover, move: Move) {

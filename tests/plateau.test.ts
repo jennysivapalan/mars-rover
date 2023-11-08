@@ -5,6 +5,7 @@ describe("test createSpace function", () => {
     const plateau = createSpace(5, 5);
     expect(plateau.width).toBe(5);
     expect(plateau.height).toBe(5);
+    expect(plateau.rovers).toEqual([]);
   });
 
   it("should return Error if invalid parameters are passed)", () => {
