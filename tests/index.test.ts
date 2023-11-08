@@ -97,4 +97,21 @@ describe("test taking input commands to create mars rover", () => {
     expect(mars.rover.y).toBe(4);
     expect(mars.rover.facingDirection).toBe("E");
   });
+
+  it("should keep rover as is if third line is empty", () => {
+    const input = ["5 5", "3 3 N", ""];
+    const mars = start(input);
+
+    expect(mars.rover.x).toBe(3);
+    expect(mars.rover.y).toBe(3);
+    expect(mars.rover.facingDirection).toBe("N");
+  });
+  it("should keep rover as is if third line is empty with space", () => {
+    const input = ["5 5", "3 3 N", " "];
+    const mars = start(input);
+
+    expect(mars.rover.x).toBe(3);
+    expect(mars.rover.y).toBe(3);
+    expect(mars.rover.facingDirection).toBe("N");
+  });
 });
