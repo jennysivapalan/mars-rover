@@ -7,6 +7,7 @@ export type Rover = {
   y: number;
   facingDirection: FacingDirection;
   plateau: Plateau;
+  hasStopped: boolean;
 };
 
 export type Rotation = {

@@ -166,4 +166,35 @@ describe("test moveRover function", () => {
     expect(rover.y).toBe(2);
     expect(rover.facingDirection).toBe("E");
   });
+
+  it("should stop moving forward and taking on instructions if it hits a boundary", () => {
+    const plateau = createSpace(3, 2);
+    const rover = createRover(plateau, 1, 1, "N");
+
+    move(rover, "M");
+    move(rover, "R");
+    move(rover, "M");
+    expect(rover.x).toBe(2);
+    expect(rover.y).toBe(2);
+    expect(rover.hasStopped).toBe(false);
+    move(rover, "L");
+
+    expect(() => {
+      move(rover, "M");
+    }).toThrow("Rover has hit the boundary so stopping here");
+
+    expect(rover.hasStopped).toBe(true);
+
+    expect(() => {
+      move(rover, "M");
+    }).toThrow("Rover has stopped it hit a boundary");
+
+    expect(() => {
+      move(rover, "L");
+    }).toThrow("Rover has stopped it hit a boundary");
+
+    expect(() => {
+      move(rover, "R");
+    }).toThrow("Rover has stopped it hit a boundary");
+  });
 });

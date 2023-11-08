@@ -25,12 +25,20 @@ export function createRover(
     Number.isInteger(x) &&
     Number.isInteger(y)
   )
-    return { x: x, y: y, facingDirection: facingDirection, plateau: plateau };
+    return {
+      x: x,
+      y: y,
+      facingDirection: facingDirection,
+      plateau: plateau,
+      hasStopped: false,
+    };
   else throw new Error("Invalid rover parameters, try again");
 }
 
 export function move(rover: Rover, move: Move) {
   const BOUNDARY_ERROR_MSG = "Rover has hit the boundary so stopping here";
+
+  if (rover.hasStopped) throw new Error("Rover has stopped it hit a boundary");
 
   if (move === "M") {
     const facingDirection = rover.facingDirection;
@@ -58,17 +66,19 @@ export function move(rover: Rover, move: Move) {
 
 function moveUpOrDown(gridMove: GridMove, rover: Rover) {
   const newY = rover.y + gridMove;
-  if (newY < 0 || newY > rover.plateau.height)
+  if (newY < 0 || newY > rover.plateau.height) {
+    rover.hasStopped = true;
     throw new Error(BOUNDARY_ERROR_MSG);
-  else rover.y = newY;
+  } else rover.y = newY;
   return rover;
 }
 
 function moveLeftOrRight(gridMove: GridMove, rover: Rover) {
   const newX = rover.x + gridMove;
-  if (newX < 0 || newX > rover.plateau.width)
+  if (newX < 0 || newX > rover.plateau.width) {
+    rover.hasStopped = true;
     throw new Error(BOUNDARY_ERROR_MSG);
-  else rover.x = newX;
+  } else rover.x = newX;
   return rover;
 }
 
