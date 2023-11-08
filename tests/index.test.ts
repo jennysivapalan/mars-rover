@@ -32,11 +32,11 @@ describe("test taking input commands to create mars rover", () => {
   });
 
   it("should create first rover for mars based on input string", () => {
-    const input = ["5 5", "1 2 N", ""];
+    const input = ["5 5", "1 2 N", "M"];
     const mars = start(input);
 
     expect(mars.rover.x).toBe(1);
-    expect(mars.rover.y).toBe(2);
+    expect(mars.rover.y).toBe(3); //as M moves the rover up one
     expect(mars.rover.facingDirection).toBe("N");
   });
 
@@ -99,19 +99,20 @@ describe("test taking input commands to create mars rover", () => {
   });
 
   it("should keep rover as is if third line is empty", () => {
-    const input = ["5 5", "3 3 N", ""];
-    const mars = start(input);
-
-    expect(mars.rover.x).toBe(3);
-    expect(mars.rover.y).toBe(3);
-    expect(mars.rover.facingDirection).toBe("N");
+    expect(() => {
+      start(["5 5", "3 3 N", ""]);
+    }).toThrow("Invalid move supplied");
   });
-  it("should keep rover as is if third line is empty with space", () => {
-    const input = ["5 5", "3 3 N", " "];
-    const mars = start(input);
+  it("should throw error if third line is empty with space", () => {
+    expect(() => {
+      start(["5 5", "3 3 N", " "]);
+    }).toThrow("Invalid move supplied");
+  });
 
-    expect(mars.rover.x).toBe(3);
-    expect(mars.rover.y).toBe(3);
-    expect(mars.rover.facingDirection).toBe("N");
+  it("should throw error if third line contains an invalid moves", () => {
+    const input = ["5 5", "3 3 N", "A"];
+    expect(() => {
+      start(["5 5", "3 3 N", "A"]);
+    }).toThrow("Invalid move supplied");
   });
 });

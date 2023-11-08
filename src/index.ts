@@ -49,5 +49,7 @@ export function landRover(line: string, plateau: Plateau) {
 }
 
 function moveRover(rover: Rover, line: string) {
-  return line.split("").map((movement) => move(rover, movement as Move));
+  const lineAsArray = line.split("");
+  if (lineAsArray.length === 0) throw new Error("Invalid move supplied");
+  return lineAsArray.map((movement) => move(rover, movement as Move));
 }

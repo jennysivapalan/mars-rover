@@ -64,6 +64,8 @@ export function move(rover: Rover, move: Move) {
     rotate(ROTATE_LEFT, rover);
   } else if (move === "R") {
     rotate(ROTATE_RIGHT, rover);
+  } else {
+    throw new Error("Invalid move supplied");
   }
   return rover;
 }
