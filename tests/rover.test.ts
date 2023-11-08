@@ -189,15 +189,15 @@ describe("test moveRover function", () => {
 
     expect(() => {
       move(rover, "M");
-    }).toThrow("Rover has stopped it hit a boundary");
+    }).toThrow("Rover has stopped and cannot move any further");
 
     expect(() => {
       move(rover, "L");
-    }).toThrow("Rover has stopped it hit a boundary");
+    }).toThrow("Rover has stopped and cannot move any further");
 
     expect(() => {
       move(rover, "R");
-    }).toThrow("Rover has stopped it hit a boundary");
+    }).toThrow("Rover has stopped and cannot move any further");
   });
 });
 
@@ -297,7 +297,7 @@ describe("test multiple rovers on a plateau (movement)", () => {
     expect(() => {
       move(rover2, "M");
     }).toThrow(
-      "A rover is already place here so this rover cannot be moved here"
+      "A rover is already place here so this rover cannot be placed here"
     );
     expect(rover2.x).toBe(2);
     expect(rover2.y).toBe(1);

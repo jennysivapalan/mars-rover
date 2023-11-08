@@ -10,8 +10,8 @@ import {
 } from "../src/rover.types";
 
 const BOUNDARY_ERROR_MSG = "Rover has hit the boundary so stopping here";
-const ROVER_IN_LOCATION =
-  "A rover is already place here so this rover cannot be moved here";
+const ROVER_IN_LOCATION_ERROR_MSG =
+  "A rover is already place here so this rover cannot be placed here";
 
 export function createRover(
   plateau: Plateau,
@@ -28,9 +28,7 @@ export function createRover(
     Number.isInteger(y)
   ) {
     if (isARoverInThisPosition(plateau, x, y))
-      throw new Error(
-        "A rover is already place here so this rover cannot be placed here"
-      );
+      throw new Error(ROVER_IN_LOCATION_ERROR_MSG);
 
     return {
       x: x,
@@ -43,9 +41,8 @@ export function createRover(
 }
 
 export function move(rover: Rover, move: Move) {
-  const BOUNDARY_ERROR_MSG = "Rover has hit the boundary so stopping here";
-
-  if (rover.hasStopped) throw new Error("Rover has stopped it hit a boundary");
+  if (rover.hasStopped)
+    throw new Error("Rover has stopped and cannot move any further");
 
   if (move === "M") {
     const facingDirection = rover.facingDirection;
@@ -78,7 +75,7 @@ function moveUpOrDown(gridMove: GridMove, rover: Rover) {
     throw new Error(BOUNDARY_ERROR_MSG);
   } else if (isARoverInThisPosition(rover.plateau, rover.x, newY)) {
     rover.hasStopped = true;
-    throw new Error(ROVER_IN_LOCATION);
+    throw new Error(ROVER_IN_LOCATION_ERROR_MSG);
   } else rover.y = newY;
   return rover;
 }
@@ -90,7 +87,7 @@ function moveLeftOrRight(gridMove: GridMove, rover: Rover) {
     throw new Error(BOUNDARY_ERROR_MSG);
   } else if (isARoverInThisPosition(rover.plateau, newX, rover.y)) {
     rover.hasStopped = true;
-    throw new Error(ROVER_IN_LOCATION);
+    throw new Error(ROVER_IN_LOCATION_ERROR_MSG);
   } else rover.x = newX;
   return rover;
 }
