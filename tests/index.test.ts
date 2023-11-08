@@ -30,4 +30,13 @@ describe("test taking input commands to create mars rover", () => {
       createMars(["-5 4.3", "1 2 N", "LMLMLMLMM", "3 3 E", "MMRMMRMRRM"]);
     }).toThrow("Can't create plateau - Error: Invalid parameters, try again");
   });
+
+  it("should create first rover for mars based on input string", () => {
+    const input = ["5 5", "1 2 N", "LMLMLMLMM"];
+    const mars = createMars(input);
+
+    expect(mars.rover.x).toBe(1);
+    expect(mars.rover.y).toBe(2);
+    expect(mars.rover.facingDirection).toBe("N");
+  });
 });
