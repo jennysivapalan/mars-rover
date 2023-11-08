@@ -27,10 +27,14 @@ function createPlateau(line: string) {
 
 function landRover(line: string, plateau: Plateau) {
   const lineAsArray = line.split(" ");
-  return createRover(
-    plateau,
-    Number(lineAsArray[0]),
-    Number(lineAsArray[1]),
-    lineAsArray[2] as FacingDirection
-  );
+  try {
+    return createRover(
+      plateau,
+      Number(lineAsArray[0]),
+      Number(lineAsArray[1]),
+      lineAsArray[2] as FacingDirection
+    );
+  } catch (error) {
+    throw new Error(`Can't create rover - ${error}`);
+  }
 }

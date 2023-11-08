@@ -39,4 +39,12 @@ describe("test taking input commands to create mars rover", () => {
     expect(mars.rover.y).toBe(2);
     expect(mars.rover.facingDirection).toBe("N");
   });
+
+  it("should error if the second line is incorrect ", () => {
+    expect(() => {
+      createMars(["5 5", "1", "LMLMLMLMM"]);
+    }).toThrow(
+      "Can't create rover - Error: Invalid rover parameters, try again"
+    );
+  });
 });
