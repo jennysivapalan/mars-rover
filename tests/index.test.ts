@@ -1,6 +1,6 @@
 import { start } from "../src/index";
 
-describe("test taking input commands to create mars rover", () => {
+describe("test creating plateau with one rover moving around", () => {
   it("should create a plateau for mars based on input string", () => {
     const input = ["5 5", "1 2 N", "M"];
     const mars = start(input);
@@ -117,7 +117,9 @@ describe("test taking input commands to create mars rover", () => {
       start(["5 5", "3 3 N", "A"]);
     }).toThrow("Invalid move supplied");
   });
+});
 
+describe("test multiple rovers on mars", () => {
   it("should parse input for more than one rover for input string", () => {
     const input = ["5 5", "3 3 N", "M", "1 1 S", "L"];
     const mars = start(input);
@@ -132,7 +134,6 @@ describe("test taking input commands to create mars rover", () => {
     expect(rovers[1].y).toBe(1);
     expect(rovers[1].facingDirection).toBe("E");
   });
-
   it("should stop if a line item is wrong", () => {
     const input = ["5 5", "3 3 N", "M", "1 1 G", "L"];
 
