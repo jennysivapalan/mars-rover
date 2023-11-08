@@ -132,4 +132,12 @@ describe("test taking input commands to create mars rover", () => {
     expect(rovers[1].y).toBe(1);
     expect(rovers[1].facingDirection).toBe("E");
   });
+
+  it("should stop if a line item is wrong", () => {
+    const input = ["5 5", "3 3 N", "M", "1 1 G", "L"];
+
+    expect(() => {
+      start(input);
+    }).toThrow("Can't create rover, invalid line: 1 1 G");
+  });
 });
