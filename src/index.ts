@@ -1,15 +1,21 @@
 import { Plateau, createSpace } from "../src/plateau";
-import { Rover, FacingDirection, FacingDirections } from "../src/rover.types";
-import { createRover } from "../src/rover";
+import {
+  Rover,
+  FacingDirection,
+  FacingDirections,
+  Move,
+} from "../src/rover.types";
+import { createRover, move } from "../src/rover";
 
 export type Mars = {
   plateau: Plateau;
   rover: Rover;
 };
 
-export function createMars(input: string[]) {
+export function start(input: string[]) {
   const plateau = createPlateau(input[0]);
   const rover = landRover(input[1], plateau);
+  moveRover(rover, input[2]);
   return { plateau: plateau, rover: rover };
 }
 
@@ -40,4 +46,8 @@ function landRover(line: string, plateau: Plateau) {
   } catch (error) {
     throw new Error(`Can't create rover - ${error}`);
   }
+}
+
+function moveRover(rover: Rover, line: string) {
+  move(rover, line as Move);
 }
