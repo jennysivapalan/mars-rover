@@ -6,6 +6,8 @@ export type Mars = {
 
 export function createMars(input: string[]) {
   const firstLineAsArray = input[0].split(" ");
+  if (firstLineAsArray.length > 2)
+    throw new Error("Can't create plateau, invalid first line");
   try {
     const plateau = createSpace(
       Number(firstLineAsArray[0]),
