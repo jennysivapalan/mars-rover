@@ -27,6 +27,8 @@ function createPlateau(line: string) {
 
 function landRover(line: string, plateau: Plateau) {
   const lineAsArray = line.split(" ");
+  if (lineAsArray.length !== 3)
+    throw new Error(`Can't create rover, invalid line: ${line}`);
   try {
     return createRover(
       plateau,
