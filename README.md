@@ -57,3 +57,11 @@ The output from the program will be
 Which is the order of the Rovers ending locations.
 
 Have fun! 👽 🛸 🚀 🤖
+
+### Future considerations
+
+- The Plateau supports just square and rectangle grids. To change it to other surface types such as circular or sphere(!) The Plateu would need to be refactored/extended. I'd consider creating an interface that would need to define it's shape and boundary rules that each shape of Plateau would need to implement.
+
+- The Rover can just move around and not bump into other Rovers. Future considerations it would need to move around rocks or other obstacles. We could also send it up with some arms to collect Mars samples so would need to extend it's variables to be able to do this.
+
+- Finally we may need to recharge the Rover so could introduce some charging points on Mars for the Rovers to get some juice.
