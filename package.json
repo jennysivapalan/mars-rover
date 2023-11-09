@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll",
-    "start": "nodemon src/index.ts"
+    "start": "nodemon src/mars.ts"
   },
   "keywords": [],
   "author": "",

@@ -1,4 +1,4 @@
-import { start } from "../src/index";
+import { start } from "../src/mars";
 
 describe("test creating plateau with one rover moving around", () => {
   it("should create a plateau for mars based on input string", () => {
