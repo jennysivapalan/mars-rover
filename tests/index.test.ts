@@ -141,4 +141,13 @@ describe("test multiple rovers on mars", () => {
       start(input);
     }).toThrow("Can't create rover, invalid line: 1 1 G");
   });
+
+  it("should stop program if rovers collide", () => {
+    const input = ["2 2", "1 1 E", "M", "2 2 S", "M"];
+    expect(() => {
+      start(input);
+    }).toThrow(
+      "A rover is already place here so this rover cannot be placed here"
+    );
+  });
 });

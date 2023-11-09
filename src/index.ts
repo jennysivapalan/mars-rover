@@ -13,8 +13,8 @@ export type Mars = {
 
 export function start(input: string[]) {
   const plateau = createPlateau(input[0]);
-  const rovers = landAndMoveRovers(input.slice(1), plateau);
-  plateau.rovers = rovers;
+  landAndMoveRovers(input.slice(1), plateau);
+
   return { plateau: plateau };
 }
 
@@ -31,17 +31,15 @@ function createPlateau(line: string) {
 }
 
 function landAndMoveRovers(input: string[], plateau: Plateau) {
-  const rovers: Array<Rover> = [];
   for (let i = 0; i < input.length; i = i + 2) {
     const roverLine = input[i];
     const moveLine = input[i + 1];
     const rover = landRover(roverLine, plateau);
-
+    plateau.rovers.push(rover);
     moveRover(rover, moveLine);
-    rovers.push(rover);
   }
 
-  return rovers;
+  return plateau;
 }
 
 export function landRover(line: string, plateau: Plateau) {
