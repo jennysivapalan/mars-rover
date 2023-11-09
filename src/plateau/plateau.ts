@@ -1,4 +1,4 @@
-import { Rover } from "../src/rover.types";
+import { Rover } from "../rover/rover.types";
 
 export type Plateau = { width: number; height: number; rovers: Rover[] };
 

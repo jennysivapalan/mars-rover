@@ -1,5 +1,5 @@
-import { createSpace, addRover } from "../src/plateau";
-import { createRover, move } from "../src/rover";
+import { createSpace, addRover } from "../../src/plateau/plateau";
+import { createRover, move } from "../../src/rover/rover";
 
 describe("test placeRover function", () => {
   it("should return a rover that is in the grid", () => {

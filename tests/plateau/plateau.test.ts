@@ -1,4 +1,4 @@
-import { createSpace } from "../src/plateau";
+import { createSpace } from "../../src/plateau/plateau";
 
 describe("test createSpace function", () => {
   it("should return a grid of 5 by 5)", () => {

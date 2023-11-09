@@ -1,6 +1,11 @@
-import { Plateau, createSpace } from "./plateau";
-import { Rover, FacingDirection, FacingDirections, Move } from "./rover.types";
-import { createRover, move } from "./rover";
+import { Plateau, createSpace } from "./plateau/plateau";
+import {
+  Rover,
+  FacingDirection,
+  FacingDirections,
+  Move,
+} from "./rover/rover.types";
+import { createRover, move } from "./rover/rover";
 
 export type Mars = {
   plateau: Plateau;

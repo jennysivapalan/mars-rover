@@ -1,4 +1,4 @@
-import { Plateau } from "../src/plateau";
+import { Plateau } from "../plateau/plateau";
 import {
   FacingDirection,
   Rover,
@@ -7,7 +7,7 @@ import {
   ROTATE_RIGHT,
   Rotation,
   GridMove,
-} from "../src/rover.types";
+} from "./rover.types";
 
 const BOUNDARY_ERROR_MSG = "Rover has hit the boundary so stopping here";
 const ROVER_IN_LOCATION_ERROR_MSG =

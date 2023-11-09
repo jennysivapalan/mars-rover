@@ -1,4 +1,4 @@
-import { Plateau } from "./plateau";
+import { Plateau } from "../plateau/plateau";
 
 export const FacingDirections = ["N", "E", "S", "W"] as const;
 export type FacingDirection = (typeof FacingDirections)[number];
