@@ -4,6 +4,7 @@ import {
   FacingDirection,
   FacingDirections,
   Move,
+  MOVES,
 } from "./rover/rover.types";
 import { createRover, move } from "./rover/rover";
 
@@ -69,5 +70,12 @@ function checkIsFacingDirection(value: unknown) {
 function moveRover(rover: Rover, line: string) {
   const lineAsArray = line.split("");
   if (lineAsArray.length === 0) throw new Error("Invalid move supplied");
-  return lineAsArray.map((movement) => move(rover, movement as Move));
+  return lineAsArray.map((movement) => {
+    if (checkIsMove(movement)) move(rover, movement as Move);
+    else throw new Error("Invalid move supplied");
+  });
+}
+
+function checkIsMove(value: unknown) {
+  return typeof value === "string" && MOVES.some((move) => move === value);
 }

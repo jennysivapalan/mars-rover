@@ -29,6 +29,6 @@ export const ROTATE_RIGHT: Rotation[] = [
   { start: "W", end: "N" },
 ];
 
-export type Move = "M" | "L" | "R";
-
+export const MOVES = ["M", "L", "R"] as const;
+export type Move = (typeof MOVES)[number];
 export type GridMove = 1 | -1;
