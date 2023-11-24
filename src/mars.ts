@@ -44,19 +44,26 @@ function landAndMoveRovers(input: string[], plateau: Plateau) {
 
 export function landRover(line: string, plateau: Plateau) {
   const lineAsArray = line.split(" ");
-  const direction = lineAsArray[2] as FacingDirection;
-  if (lineAsArray.length !== 3 || !FacingDirections.includes(direction))
+  const direction = lineAsArray[2];
+  if (lineAsArray.length !== 3 || !checkIsFacingDirection(direction))
     throw new Error(`Can't create rover, invalid line: ${line}`);
   try {
     return createRover(
       plateau,
       Number(lineAsArray[0]),
       Number(lineAsArray[1]),
-      direction
+      direction as FacingDirection
     );
   } catch (error) {
     throw new Error(`Can't create rover - ${error}`);
   }
+}
+
+function checkIsFacingDirection(value: unknown) {
+  return (
+    typeof value === "string" &&
+    FacingDirections.some((direction) => value === direction)
+  );
 }
 
 function moveRover(rover: Rover, line: string) {
